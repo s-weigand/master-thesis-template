@@ -1,0 +1,84 @@
+
+\documentclass[11pt,a4paper,twoside]{report}
+\input{_preamble_notebook}
+\input{_preamble}
+\input{personal_data}
+
+
+\begin{document}
+\pagenumbering{Roman}
+
+\newcommand\blankpage{%
+	\null{}
+	\thispagestyle{empty}%
+	\addtocounter{page}{-1}%
+	\newpage}
+
+\thispagestyle{empty}
+\begin{center}
+	\Huge\textbf{\ThesisTitle}
+	\vfill
+	\Large
+	Master Thesis \\
+	\vspace{20pt}
+	\normalsize
+	presented by \\[5pt]
+	{\Large \AuthorName} \\[5pt]
+	Student ID\@: \(\StudentId{}\) \\
+	\vspace{20pt}
+	\FacultyName{} \\
+	\UniversityName{} \\
+	\the\year{}
+\end{center}
+\newpage
+
+% >>> Reviewer page <<<
+
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{tabbing}
+	1. Something\@: \=\kill
+	1. Reviewer: \>\FirstReviewerName{} \\[11pt]
+	2. Reviewer: \>\SecondReviewerName{} \\[11pt]
+\end{tabbing}
+\vspace{11pt}
+Handover date: \HandoverDate{}
+\newpage
+
+
+% >>> statutory <<<
+\thispagestyle{empty}
+% \input{statutory/statutory_de}
+\input{statutory/statutory_en}
+\afterpage{\blankpage}
+
+% >>> Content <<<
+\tableofcontents
+\clearpage
+
+
+\setcounter{page}{0}
+\pagenumbering{arabic}
+
+\input{chapters/1_intro.tex}
+\input{chapters/2_theory.tex}
+\input{chapters/3_analysis.tex}
+\input{chapters/4_results.tex}
+\input{chapters/5_conclusion}
+
+% >>> Bibliography <<<
+\renewcommand{\bibname}{Bibliography}
+\addcontentsline{toc}{chapter}{\bibname}
+\printbibliography[notcategory = fullcited]
+
+% >>> Appendices <<<
+
+%
+\begin{appendices}
+	\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+	% 	\input{chap/6append}
+	%
+	\input{notebooks/index.tex}
+\end{appendices}
+
+\end{document}

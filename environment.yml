@@ -1,0 +1,15 @@
+name: master-thesis
+channels:
+  - conda-forge
+dependencies:
+  # Latex compiler
+  - tectonic>=0.11.0
+  # Notebook runner
+  - papermill>=2.3.4
+  # Notebook converter
+  - nbformat>=5.6.1
+  - nbconvert>=7.2.1
+  - pandoc>=2.19.2
+  - pip
+  - pip:
+      - -r requirements.txt

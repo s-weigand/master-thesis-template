@@ -1,0 +1,128 @@
+{
+  "terminal.integrated.profiles.windows": {
+    "WSL": {
+      "path": ["C:\\WINDOWS\\System32\\wsl.exe"],
+      "args": []
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "WSL",
+  "window.title": "${rootName}${separator}${dirty}${activeEditorShort}${separator}${appName}",
+  "editor.renderWhitespace": "all",
+  "files.autoSave": "onFocusChange",
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "workbench.colorTheme": "Flatland Monokai",
+  "workbench.iconTheme": "vscode-icons",
+  "editor.fontFamily": "'Firicico', 'Fira Code', Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": [
+          //following will be in italics (=Pacifico)
+          // "entity.name.type.class", //class names
+          "keyword", //import, export, return…
+          //"support.class.builtin.js", //String, Number, Boolean…, this, super
+          "storage.modifier", //static keyword
+          "storage.type.class.js", //class keyword
+          "storage.type.function.js", // function keyword
+          "storage.type.js", // Variable declarations
+          "keyword.control.import.js", // Imports
+          "keyword.control.from.js", // From-Keyword
+          //"entity.name.type.js", // new … Expression
+          "keyword.control.flow.js", // await
+          "keyword.control.conditional.js", // if
+          "keyword.control.loop.js", // for
+          "keyword.operator.new.js" // new
+        ],
+        "settings": {
+          "fontStyle": "italic"
+        }
+      },
+      {
+        "scope": [
+          //following will be excluded from italics (My theme (Monokai dark) has some defaults I don't want to be in italics)
+          "invalid",
+          "comment",
+          "support.type",
+          "variable.parameter.latex",
+          "support.class.latex",
+          "variable.parameter.definition.label.latex",
+          "support.class.math.latex",
+          "meta.function.environment.math.latex",
+          "support.class.math.block.environment.latex",
+          "support.class.math.block.tex",
+          "keyword.operator",
+          "constant.numeric.css",
+          "keyword.other.unit.px.css",
+          "constant.numeric.decimal.js",
+          "constant.numeric.json",
+          "entity.name.type.class.js"
+        ],
+        "settings": {
+          "fontStyle": ""
+        }
+      }
+    ]
+  },
+  "latex-workshop.linting.chktex.enabled": true,
+  "latex-workshop.latexindent.path": "latexindent",
+  "latex-workshop.intellisense.package.enabled": true,
+  "latex-workshop.intellisense.unimathsymbols.enabled": true,
+  "latex-workshop.synctex.synctexjs.enabled": true,
+  "latex-workshop.latex.recipe.default": "tectonic",
+  "latex-workshop.view.autoFocus.enabled": true,
+  // "latex-workshop.latex.autoBuild.interval": 1000,
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "cSpell.overrides": [
+    // Force `**/*_de.tex` to be treated as German (dictionary needs to be installed separately):
+    {
+      "filename": "**/*_de.tex",
+      "language": "de"
+    }
+  ],
+  // "latex-workshop.docker.enabled": true,
+  // "latex-workshop.docker.image.latex": "dxjoke/tectonic-docker:0.9.0-alpine-biber",
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#8B8B3A",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#8B8B3A",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#8B8B3A",
+    "titleBar.inactiveForeground": "#e7e7e7"
+  },
+  "files.exclude": {
+    "**/.ipynb_checkpoints": true,
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/*.bbl": true,
+    "**/*.toc": true,
+    "**/*.aux": true,
+    "**/*.blg": true,
+    "**/*.fls": true,
+    "**/*.out": true,
+    "**/*.synctex.gz": true,
+    "**/*.synctex": true,
+    "**/*.fdb_latexmk": true,
+    "**/*.dvi": true,
+    "**/__latexindent_temp.tex": true
+  },
+  "editor.formatOnSave": true,
+  "files.associations": {
+    "requirements_dev.txt": "pip-requirements"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  },
+  "isort.args": ["--profile", "black"]
+}

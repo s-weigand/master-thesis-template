@@ -1,0 +1,23 @@
+{
+  // See http://go.microsoft.com/fwlink/?LinkId=827846
+  // for the documentation about the extensions.json format
+  "recommendations": [
+    // general editor style
+    "eamodio.gitlens",
+    "vscode-icons-team.vscode-icons",
+    "gerane.theme-flatlandmonokai",
+    "editorconfig.editorconfig",
+    "emilast.LogFileHighlighter",
+    "timonwong.shellcheck",
+    "oderwat.indent-rainbow",
+    "aaron-bond.better-comments",
+    "ryu1kn.partial-diff",
+    "rubymaniac.vscode-paste-and-indent",
+    "igorsbitnev.error-gutters",
+    "rssowl.copy-relative-path-posix",
+    // Multi lingual spallchecker
+    "streetsidesoftware.code-spell-checker",
+    // latex
+    "James-Yu.latex-workshop"
+  ]
+}

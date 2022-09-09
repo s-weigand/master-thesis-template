@@ -1,0 +1,55 @@
+repos:
+  - repo: https://github.com/jonasbb/pre-commit-latex-hooks
+    rev: v1.3.0
+    hooks:
+      - id: american-eg-ie
+      - id: cleveref-capitalization
+      - id: consistent-spelling
+        args:
+          [
+            "--emph=et al.",
+            "--emph=a priori",
+            "--emph=a posteriori",
+            '--regex=naive=\bna(i|\\"i)ve',
+          ]
+      - id: csquotes
+      - id: ensure-labels-for-sections
+        exclude: "^src/(statutory/)"
+      - id: no-space-in-cite
+      - id: tilde-cite
+      - id: unique-labels
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.3.0
+    hooks:
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: trailing-whitespace
+        files: ".*\\.(?:tex|py)$"
+      - id: mixed-line-ending
+        args:
+          - "--fix=lf"
+
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.5.2
+    hooks:
+      - id: nbqa-black
+        additional_dependencies: [black==22.8.0]
+        args: [--nbqa-mutate]
+      - id: nbqa-pyupgrade
+        additional_dependencies: [pyupgrade==2.37.3]
+        args: [--nbqa-mutate, --py38-plus]
+      - id: nbqa-flake8
+      - id: nbqa-check-ast
+      - id: nbqa-isort
+        additional_dependencies: [isort==5.10.1]
+        args: [--nbqa-mutate]
+
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.6.1
+    hooks:
+      - id: nbstripout
+        args:
+          - "--drop-empty-cells"
+          - "--extra-keys"
+          - "metadata.vscode metadata.language_info.version"

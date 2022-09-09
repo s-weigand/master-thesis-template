@@ -1,0 +1,74 @@
+%
+\if@twoside \def\ps@headings{\let\@mkboth\markboth%
+%
+\def\@oddfoot{}%
+\def\@evenfoot{}%
+%
+\def\@evenhead{%
+\underline{\hbox to \textwidth{\strut%
+\rm \thepage\hfil \sl \leftmark }}}%
+%
+\def\@oddhead{\hbox{}%
+\underline{\hbox to \textwidth{\strut%
+\sl \rightmark \hfil \rm \thepage}}}%
+%
+\def\chaptermark##1{\markboth {{\ifnum \c@secnumdepth%
+>\m@ne%
+\@chapapp\ \thechapter. \ \fi ##1}}{}}
+%
+\def\sectionmark##1{\markright {{\ifnum \c@secnumdepth%
+>\z@ \thesection. \ \fi ##1}}}}%
+%
+\else%
+\def\ps@headings{\let\@mkboth\markboth%
+\def\@oddfoot{}%
+\def\@evenfoot{}%
+\def\@oddhead{%
+\underline{\hbox to \textwidth{\strut%
+\sl \rightmark \hfil \rm \thepage}}}%
+\def\chaptermark##1{\markright {{\ifnum \c@secnumdepth%
+>\m@ne%
+\@chapapp\ \thechapter. \ \fi ##1}}}}%
+\fi%
+\def\ps@myheadings{\let\@mkboth\@gobbletwo%
+\def\@oddhead{%
+\underline{\hbox to \textwidth{\strut%
+\hbox{}\sl\rightmark \hfil%
+\rm\thepage}}}%
+\def\@oddfoot{}%
+\def\@evenhead{
+\underline{\hbox to \textwidth{\strut
+\rm \thepage\hfil\sl\leftmark\hbox{}}}}
+\def\@evenfoot{}
+\def\sectionmark##1{}\def\subsectionmark##1{}}
+%
+\def\ps@emheadings{\let\@mkboth\markboth%
+%
+\def\@oddfoot{\hfil \rm \thepage \hfil}%
+\def\@evenfoot{\hfil \rm \thepage \hfil}%
+%
+\def\@evenhead{%
+\underline{\hbox to \textwidth{\strut%
+\sl \leftmark \hfil}}}%
+%
+\def\@oddhead{\hbox{}%
+\underline{\hbox to \textwidth{\strut%
+\hfil \sl \rightmark}}}%
+%
+\def\chaptermark##1{\markboth {{\ifnum \c@secnumdepth%
+>\m@ne%
+\@chapapp\ \thechapter. \ \fi ##1}}{}}
+%
+\def\sectionmark##1{\markright {{\ifnum \c@secnumdepth%
+>\z@ \thesection. \ \fi ##1}}}}%
+%
+% nice captions
+\makeatletter
+\long\def\@makecaption#1#2{
+ \vskip 10pt
+ \protect\small
+ \setbox\@tempboxa\hbox{{\protect\bf #1:} #2}
+ \ifdim \wd\@tempboxa >\hsize \unhbox\@tempboxa\par \else \hbox
+to\hsize{\hfil\box\@tempboxa\hfil}
+ \fi}
+\makeatother
