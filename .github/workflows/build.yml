@@ -1,0 +1,59 @@
+name: "Tests"
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - v**
+    branches-ignore:
+      - "dependabot/**"
+      - "sourcery/**"
+      - "create-pr-action/**"
+  pull_request:
+
+jobs:
+  pre-commit:
+    name: 🧹 Run pre-commit
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.0.0
+
+  build:
+    name: 🚀 Compile and upload master thesis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup conda
+        uses: s-weigand/setup-conda@v1
+        with:
+          conda-channels: conda-forge
+          activate-conda: false
+
+      - name: Install biber
+        run: |
+          sudo cp .github/sources.list /etc/apt/sources.list
+          sudo apt-get update
+          sudo apt-get install biber=2.17-2 -y
+
+      - name: Install dependencies
+        run: |
+          conda env create -f environment.yml
+
+      - name: Run Notebooks and compile thesis
+        run: |
+          source activate master-thesis
+          python scripts/run_notebook_and_compile.py
+
+      - name: Upload src/master_thesis.pdf
+        uses: actions/upload-artifact@v3
+        with:
+          name: master-thesis
+          path: src/master_thesis.pdf

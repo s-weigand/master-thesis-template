@@ -52,4 +52,4 @@ repos:
         args:
           - "--drop-empty-cells"
           - "--extra-keys"
-          - "metadata.vscode metadata.language_info.version"
+          - "metadata.vscode metadata.language_info.version metadata.papermill"

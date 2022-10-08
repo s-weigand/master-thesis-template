@@ -2,10 +2,13 @@ name: master-thesis
 channels:
   - conda-forge
 dependencies:
+  # Python interpreter
+  - python=3.10
   # Latex compiler
   - tectonic>=0.11.0
   # Notebook runner
   - papermill>=2.3.4
+  - ipykernel>=6.16.0
   # Notebook converter
   - nbformat>=5.6.1
   - nbconvert>=7.2.1
