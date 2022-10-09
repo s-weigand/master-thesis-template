@@ -4,6 +4,9 @@ channels:
 dependencies:
   # Python interpreter
   - python=3.10
+  # pre-commit requirements
+  - pre-commit>=2.20.0
+  - rust>=1.64.0
   # Latex compiler
   - tectonic>=0.11.0
   # Notebook runner
