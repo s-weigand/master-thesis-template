@@ -1,4 +1,4 @@
-name: "Tests"
+name: "Build"
 on:
   workflow_dispatch:
   push:
@@ -31,21 +31,29 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - uses: actions/cache@v3
+        name: Tectonic Cache
+        with:
+          path: ~/.cache/Tectonic
+          key: ${{ runner.os }}-tectonic-${{ hashFiles('**/_preamble*.tex') }}
+          restore-keys: |
+            ${{ runner.os }}-tectonic-
+
       - name: Setup conda
         uses: s-weigand/setup-conda@v1
         with:
           conda-channels: conda-forge
           activate-conda: false
 
-      - name: Install biber
-        run: |
-          sudo cp .github/sources.list /etc/apt/sources.list
-          sudo apt-get update
-          sudo apt-get install biber=2.17-2 -y
-
       - name: Install dependencies
         run: |
           conda env create -f environment.yml
+
+      - name: Setup tectonic and biber
+        uses: wtfjoke/setup-tectonic@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          biber-version: "2.17"
 
       - name: Run Notebooks and compile thesis
         run: |
