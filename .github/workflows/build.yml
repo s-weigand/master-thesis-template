@@ -55,7 +55,6 @@ jobs:
 
       - name: Run Notebooks and compile thesis
         run: |
-          source activate master-thesis
           python scripts/run_notebook_and_compile.py
 
       - name: Upload src/master_thesis.pdf
