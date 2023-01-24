@@ -27,6 +27,9 @@ jobs:
   build:
     name: 🚀 Compile and upload master thesis
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -39,15 +42,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-tectonic-
 
-      - name: Setup conda
-        uses: s-weigand/setup-conda@v1
+      - name: Install Conda environment with Micromamba
+        uses: mamba-org/provision-with-micromamba@main
         with:
-          conda-channels: conda-forge
-          activate-conda: false
-
-      - name: Install dependencies
-        run: |
-          conda env create -f environment.yml
+          cache-env: true
 
       - name: Setup tectonic and biber
         uses: wtfjoke/setup-tectonic@v2
