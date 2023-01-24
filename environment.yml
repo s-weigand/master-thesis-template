@@ -17,5 +17,7 @@ dependencies:
   - nbconvert>=7.2.1
   - pandoc>=2.19.2
   - pip
-  - pip:
-      - -r requirements.txt
+  # Requirements to run the notebook which are not on conda-forge
+  # Or require a development version directly from git to work
+  # - pip:
+  #     - dependency==1
