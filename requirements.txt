@@ -1,2 +1,0 @@
-# Requirements to run the notebook which are not on conda-forge
-# Or require a development version directly from git to work
