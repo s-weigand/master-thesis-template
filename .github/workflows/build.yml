@@ -65,7 +65,7 @@ jobs:
 
       - name: Create requirements.txt
         if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
-        run: pip --freeze > requirements.txt
+        run: pip freeze > requirements.txt
 
       - name: Create release asset
         if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
