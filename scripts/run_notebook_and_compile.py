@@ -15,7 +15,7 @@ REPO_ROOT = Path(__file__).parent.parent
 NOTEBOOK_DIR = REPO_ROOT / "notebooks"
 OUTPUT_DIR = REPO_ROOT / "src/notebooks"
 
-CONVERTER = LatexExporter()
+CONVERTER = LatexExporter(template_file=(REPO_ROOT / "scripts/latex_template.tex").as_posix())
 
 NOTEBOOK_BODY_PATTERN = re.compile(
     r".+\\begin{document}(:?\s+\\maketitle)\s*(?P<notebook_body>.+)\s*\\end{document}",
