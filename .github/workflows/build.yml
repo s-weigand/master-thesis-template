@@ -18,13 +18,15 @@ jobs:
     name: 🧹 Run pre-commit
     runs-on: ubuntu-22.04
     steps:
-      - name: Check out repo
+      - name: ⏬ Check out repo
         uses: actions/checkout@v3
-      - name: Set up Python
+
+      - name: 🐍 Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.8
-      - name: Run pre-commit
+          python-version: 3.10
+
+      - name: 🧹 Run pre-commit
         uses: pre-commit/action@v3.0.0
 
   build:
@@ -34,51 +36,51 @@ jobs:
       run:
         shell: bash -l {0}
     steps:
-      - name: Checkout repo
+      - name: ⏬ Checkout repo
         uses: actions/checkout@v3
 
-      - uses: actions/cache@v3
-        name: Tectonic Cache
+      - name: 🏗️ Tectonic Cache
+        uses: actions/cache@v3
         with:
           path: ~/.cache/Tectonic
           key: ${{ runner.os }}-tectonic-${{ hashFiles('**/_preamble*.tex') }}
           restore-keys: |
             ${{ runner.os }}-tectonic-
 
-      - name: Install Conda environment with Micromamba
+      - name: 🐍 Install Conda environment with Micromamba
         uses: mamba-org/provision-with-micromamba@v15
         with:
           cache-env: true
 
-      - name: Setup tectonic and biber
+      - name: 🖋️ Setup tectonic and biber
         uses: wtfjoke/setup-tectonic@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           biber-version: "2.17"
 
-      - name: Run Notebooks and compile thesis
+      - name: 🏃‍♂️ Run Notebooks and compile thesis
         run: |
           python scripts/run_notebook_and_compile.py
 
-      - name: Upload src/master_thesis.pdf
+      - name: ⬆️ Upload src/master_thesis.pdf
         uses: actions/upload-artifact@v3
         with:
           name: master-thesis
           path: src/master_thesis.pdf
 
-      - name: Create requirements.txt
+      - name: 🔧 Create requirements.txt
         if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
         run: pip freeze > requirements.txt
 
-      - name: Copy PDF to repo root
+      - name: ♻️ Copy PDF to repo root
         if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
         run: cp src/master_thesis.pdf master_thesis.pdf
 
-      - name: Create release asset
+      - name: 📦 Create release asset
         if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
         run: zip -r master_thesis.zip master_thesis.pdf requirements.txt notebooks images
 
-      - name: Upload Release Asset
+      - name: 🚀⬆️ Upload Release Asset
         if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
         uses: softprops/action-gh-release@v1
         with:
