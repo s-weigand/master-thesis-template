@@ -70,9 +70,13 @@ jobs:
         if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
         run: pip freeze > requirements.txt
 
+      - name: Copy PDF to repo root
+        if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
+        run: cp src/master_thesis.pdf master_thesis.pdf
+
       - name: Create release asset
         if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
-        run: zip -r master_thesis.zip src/master_thesis.pdf requirements.txt notebooks images
+        run: zip -r master_thesis.zip master_thesis.pdf requirements.txt notebooks images
 
       - name: Upload Release Asset
         if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
