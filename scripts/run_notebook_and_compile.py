@@ -15,7 +15,9 @@ REPO_ROOT = Path(__file__).parent.parent
 NOTEBOOK_DIR = REPO_ROOT / "notebooks"
 OUTPUT_DIR = REPO_ROOT / "src/notebooks"
 
-CONVERTER = LatexExporter(template_file=(REPO_ROOT / "scripts/latex_template.tex").as_posix())
+CONVERTER = LatexExporter(
+    template_file=(REPO_ROOT / "scripts/latex_template.tex").as_posix()
+)
 
 NOTEBOOK_BODY_PATTERN = re.compile(
     r".+\\begin{document}(:?\s+\\maketitle)\s*(?P<notebook_body>.+)\s*\\end{document}",
@@ -65,17 +67,18 @@ def convert_notebook(notebook_path: Path) -> None:
     body = extract_notebook_tex_body(body)
     body = raise_heading_level(body)
     rel_path = notebook_path.relative_to(NOTEBOOK_DIR)
+    (OUTPUT_DIR / rel_path).parent.mkdir(parents=True, exist_ok=True)
     (OUTPUT_DIR / rel_path).with_suffix(".tex").write_text(body)
 
 
-def create_notebook_tex_index():
+def create_notebook_tex_appendix_index():
     """Create index file including the notebooks."""
     notebook_includes = [
         f"\\include{{{notebook_tex_path.relative_to(OUTPUT_DIR.parent)}}}"
         for notebook_tex_path in OUTPUT_DIR.rglob("*.tex")
         if notebook_tex_path.name != "index.tex"
     ]
-    (OUTPUT_DIR / "index.tex").write_text("\n".join(notebook_includes))
+    (OUTPUT_DIR / "appendix/index.tex").write_text("\n".join(notebook_includes))
 
 
 def compile_thesis():
@@ -93,7 +96,7 @@ def main():
         for notebook_path in NOTEBOOK_DIR.rglob("*.ipynb"):
             run_notebooks(notebook_path)
             convert_notebook(notebook_path)
-    create_notebook_tex_index()
+    create_notebook_tex_appendix_index()
     compile_thesis()
 
 
