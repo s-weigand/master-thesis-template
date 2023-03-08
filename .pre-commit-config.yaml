@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/jonasbb/pre-commit-latex-hooks
-    rev: v1.3.0
+    rev: v1.4.0
     hooks:
       - id: american-eg-ie
       - id: cleveref-capitalization
@@ -20,7 +20,7 @@ repos:
       - id: unique-labels
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.3.0
+    rev: v4.4.0
     hooks:
       - id: check-merge-conflict
       - id: check-yaml
@@ -31,18 +31,18 @@ repos:
           - "--fix=lf"
 
   - repo: https://github.com/nbQA-dev/nbQA
-    rev: 1.5.2
+    rev: 1.6.3
     hooks:
       - id: nbqa-black
-        additional_dependencies: [black==22.8.0]
+        additional_dependencies: [black==23.1.0]
         args: [--nbqa-mutate]
       - id: nbqa-pyupgrade
-        additional_dependencies: [pyupgrade==2.37.3]
-        args: [--nbqa-mutate, --py38-plus]
+        additional_dependencies: [pyupgrade==3.3.1]
+        args: [--nbqa-mutate, --py310-plus]
       - id: nbqa-flake8
       - id: nbqa-check-ast
       - id: nbqa-isort
-        additional_dependencies: [isort==5.10.1]
+        additional_dependencies: [isort==5.12.0]
         args: [--nbqa-mutate]
 
   - repo: https://github.com/kynan/nbstripout
@@ -52,4 +52,4 @@ repos:
         args:
           - "--drop-empty-cells"
           - "--extra-keys"
-          - "metadata.vscode metadata.language_info.version metadata.papermill"
+          - "metadata.vscode metadata.language_info.version cell.metadata.papermill metadata.papermill"
